@@ -29,7 +29,6 @@ void llist_insert_tail(struct node **head, struct node *n){
         temp->next=n;
     }
 }
-//link logic still untested
 
 void llist_print(struct node *head){
     if(head==NULL){
@@ -66,7 +65,6 @@ struct node *node_alloc(int value){
 
 void node_free(struct node *n){
     free(n);
-    n=NULL; //either helping with undefined behavior or totally useless
 }
 
 int main(int argc, char *argv[]){
@@ -76,25 +74,21 @@ int main(int argc, char *argv[]){
         int i=1;
         while(argv[i]!=NULL){
             if(strcmp(argv[i],"ih")==0){
-                //printf("insertHead %d, ", atoi(argv[i+1]));
                 struct node *n=node_alloc(atoi(argv[i+1]));
                 llist_insert_head(&head,n);
                 i+=2;
             }
             else if(strcmp(argv[i],"it")==0){
-                //printf("insertTail %d, ", atoi(argv[i+1]));
                 struct node *n=node_alloc(atoi(argv[i+1]));
                 llist_insert_tail(&head, n);
                 i+=2;
             }
             else if(strcmp(argv[i],"dh")==0){
-                //printf("deleteHead, ");
                 struct node *n =llist_delete_head(&head);
                 node_free(n);
                 i++;
             }
             else if(strcmp(argv[i],"f")==0){
-                //printf("free, ");
                 llist_free(&head);
                 head=NULL;
                 i++;
