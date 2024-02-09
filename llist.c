@@ -75,22 +75,36 @@ int main(int argc, char *argv[]){
         while(argv[i]!=NULL){
             if(strcmp(argv[i],"ih")==0){
                 struct node *n=node_alloc(atoi(argv[i+1]));
-                llist_insert_head(&head,n);
+                if(head!=NULL){
+                    llist_insert_head(&head,n);
+                }
+                else{
+                    head=n;
+                }
                 i+=2;
             }
             else if(strcmp(argv[i],"it")==0){
                 struct node *n=node_alloc(atoi(argv[i+1]));
-                llist_insert_tail(&head, n);
+                if(head!=NULL){
+                    llist_insert_tail(&head, n);
+                }
+                else{
+                    head=n;
+                }
                 i+=2;
             }
             else if(strcmp(argv[i],"dh")==0){
-                struct node *n =llist_delete_head(&head);
-                node_free(n);
+                if(head!=NULL){
+                    struct node *n =llist_delete_head(&head);
+                    node_free(n);
+                }
                 i++;
             }
             else if(strcmp(argv[i],"f")==0){
-                llist_free(&head);
-                head=NULL;
+                if(head!=NULL){
+                    llist_free(&head);
+                    head=NULL;
+                }
                 i++;
             }
             else if(strcmp(argv[i],"p")==0){
