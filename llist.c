@@ -9,9 +9,10 @@ void llist_insert_head(struct node **head, struct node *n){
 }
 
 struct node *llist_delete_head(struct node **head){
-    struct node *n=*head;
+    //llist_print(*head);
     head=&((*head)->next);
-    return n;
+    //llist_print(*head);
+    return *head;
 }
 //link logic still untested
 
@@ -38,7 +39,6 @@ void llist_print(struct node *head){
         printf("\n");
     }
 }
-//link logic still untested
 
 void llist_free(struct node **head){
     struct node *n=(*head)->next;
@@ -61,6 +61,7 @@ struct node *node_alloc(int value){
 
 void node_free(struct node *n){
     free(n);
+    n=NULL;//unsure if needed
 }
 
 int main(int argc, char *argv[]){
@@ -83,7 +84,7 @@ int main(int argc, char *argv[]){
             }
             else if(strcmp(argv[i],"dh")==0){
                 //printf("deleteHead, ");
-                node_free(llist_delete_head(&head));
+                head=llist_delete_head(&head);
                 i++;
             }
             else if(strcmp(argv[i],"f")==0){
