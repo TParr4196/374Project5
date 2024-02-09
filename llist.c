@@ -4,30 +4,52 @@
 #include<stdlib.h>
 
 void llist_insert_head(struct node **head, struct node *n){
+    n->next=*head;
     *head=n;
 }
 
 struct node *llist_delete_head(struct node **head){
     struct node *n=*head;
-    head=NULL;
+    head=&((*head)->next);
     return n;
 }
+//link logic still untested
 
 void llist_insert_tail(struct node **head, struct node *n){
-    *head=n;
+    struct node *temp = *head;
+    while(temp->next!=NULL){
+        temp=temp->next;
+    }
+    temp=n;
 }
+//link logic still untested
 
 void llist_print(struct node *head){
     if(head==NULL){
         printf("[empty]\n");
     }else{
+        struct node *n=head->next;
         printf("%d", head->value);
+        while(n!=NULL){
+            struct node *nn= n->next;
+            printf(" -> %d", n->value);
+            n=nn;
+        }
+        printf("\n");
     }
 }
+//link logic still untested
 
 void llist_free(struct node **head){
+    struct node *n=(*head)->next;
     node_free(*head);
+    while(n!=NULL){
+        struct node *nn = n->next;
+        node_free(n);
+        n=nn;
+    }
 }
+//link logic still untested
 
 struct node *node_alloc(int value){
     struct node *n;
@@ -61,7 +83,7 @@ int main(int argc, char *argv[]){
             }
             else if(strcmp(argv[i],"dh")==0){
                 //printf("deleteHead, ");
-                llist_delete_head(&head);
+                node_free(llist_delete_head(&head));
                 i++;
             }
             else if(strcmp(argv[i],"f")==0){
