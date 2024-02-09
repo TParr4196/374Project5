@@ -13,14 +13,18 @@ struct node *llist_delete_head(struct node **head){
     *head=(*head)->next;
     return n;
 }
-//link logic still untested
 
 void llist_insert_tail(struct node **head, struct node *n){
-    struct node *temp = *head;
-    while(temp->next!=NULL){
-        temp=temp->next;
+    if(head==NULL){
+        *head=n;
     }
-    temp=n;
+    else{
+        struct node *temp = *head;
+        while(temp->next!=NULL){
+            temp=temp->next;
+        }
+        temp->next=n;
+    }
 }
 //link logic still untested
 
@@ -48,7 +52,6 @@ void llist_free(struct node **head){
         n=nn;
     }
 }
-//link logic still untested
 
 struct node *node_alloc(int value){
     struct node *n;
@@ -60,7 +63,7 @@ struct node *node_alloc(int value){
 
 void node_free(struct node *n){
     free(n);
-    n=NULL;
+    n=NULL; //either helping with undefined behavior or totally useless
 }
 
 int main(int argc, char *argv[]){
