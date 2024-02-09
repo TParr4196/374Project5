@@ -9,13 +9,16 @@ void llist_insert_head(struct node **head, struct node *n){
 }
 
 struct node *llist_delete_head(struct node **head){
+    if(*head==NULL){
+        return *head;
+    }
     struct node *n=*head;
     *head=(*head)->next;
     return n;
 }
 
 void llist_insert_tail(struct node **head, struct node *n){
-    if(head==NULL){
+    if(*head==NULL){
         *head=n;
     }
     else{
@@ -93,6 +96,7 @@ int main(int argc, char *argv[]){
             else if(strcmp(argv[i],"f")==0){
                 //printf("free, ");
                 llist_free(&head);
+                head=NULL;
                 i++;
             }
             else if(strcmp(argv[i],"p")==0){
