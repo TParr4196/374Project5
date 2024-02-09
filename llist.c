@@ -57,7 +57,7 @@ void llist_free(struct node **head){
 
 struct node *node_alloc(int value){
     struct node *n;
-    n=malloc(16);//sizeof(struct node is 16)
+    n=malloc(16);//sizeof(struct node *n) is 16
     n->value=value;
     n->next=NULL;
     return n;
